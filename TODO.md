@@ -1,6 +1,5 @@
 # TODO
 
-* Links!
 * Language codes!
 * Sort by date
 * Date format
