@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 # <bitbar.title>Wikipedia On This Day</bitbar.title>
-# <bitbar.version>0.1.0</bitbar.version>
+# <bitbar.version>0.1.1</bitbar.version>
 # <bitbar.author>Ryan Scott Lewis</bitbar.author>
 # <bitbar.author.github>RyanScottLewis</bitbar.author.github>
 # <bitbar.desc>Display Wikipedia On This Day information.</bitbar.desc>
