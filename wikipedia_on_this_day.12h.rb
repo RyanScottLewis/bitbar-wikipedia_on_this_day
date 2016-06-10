@@ -4,7 +4,9 @@
 # <bitbar.author>Ryan Scott Lewis</bitbar.author>
 # <bitbar.author.github>RyanScottLewis</bitbar.author.github>
 # <bitbar.desc>Display Wikipedia On This Day information.</bitbar.desc>
+# <bitbar.image>https://raw.githubusercontent.com/RyanScottLewis/bitbar-wikipedia_on_this_day/master/Screenshot.png</bitbar.image>
 # <bitbar.dependencies>ruby (wikipedia, wikicloth, nokogiri rubygems)</bitbar.dependencies>
+# <bitbar.abouturl>https://github.com/RyanScottLewis/bitbar-wikipedia_on_this_day</bitbar.abouturl>
 
 require "wikipedia" # gem install wikipedia-client
 require "wikicloth" # gem install wikicloth
