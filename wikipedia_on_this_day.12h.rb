@@ -12,18 +12,14 @@ require "wikipedia" # gem install wikipedia-client
 require "wikicloth" # gem install wikicloth
 require "nokogiri"  # gem install nokogiri
 
-def convert_wiki_to_html(data)
-  WikiCloth::Parser.new(data: data).to_html
-end
-
-day_str = Time.now.strftime("%B %e")
-page = Wikipedia.find(day_str, prop: "revisions", rvprop: "content")
-
 within_events_section = false
-lines = page.content.lines.each_with_object([]) do |line, memo|
+day_str = Time.now.strftime("%B %e")
 
-  html = convert_wiki_to_html(line)
-  html_document = Nokogiri::HTML(html)
+wiki_api_response = Wikipedia.find(day_str)
+
+lines = wiki_api_response.content.lines.each_with_object([]) do |line, memo|
+  wiki_document = WikiCloth::Parser.new(data: line)
+  html_document = Nokogiri::HTML(wiki_document.to_html)
 
   headline_node = html_document.xpath("//h2/span[@class='mw-headline']").first
 
@@ -31,10 +27,15 @@ lines = page.content.lines.each_with_object([]) do |line, memo|
     within_events_section = headline_node.text == "Events"
   else
     next unless within_events_section
-
     list_item_node = html_document.xpath("//ul/li")
 
-    memo <<  list_item_node.text
+    memo << list_item_node.text
+
+    wiki_document.internal_links.each do |page_title|
+      url = "https://en.wikipedia.org/wiki/#{page_title.gsub(" ", "_")}"
+
+      memo << "-- #{page_title} | href=#{url}"
+    end
   end
 end
 
